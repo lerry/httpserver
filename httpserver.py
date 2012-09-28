@@ -1,4 +1,6 @@
-# -*- coding: utf-8 -*-
+#! /usr/bin/env python
+#coding=utf-8
+
 '''
 For:
 by Lerry  http://lerry.org
@@ -230,7 +232,10 @@ def run(port=8080, doc_root=os.getcwd()):
     serv = ThreadingServer(serveraddr, get_handler(doc_root))
     print 'Server Started at port:',port
     serv.serve_forever()
-    
-if __name__=='__main__':
+
+def test():
     import doctest
-    print doctest.testmod()    
+    print doctest.testmod()
+
+if __name__=='__main__':
+    run()
