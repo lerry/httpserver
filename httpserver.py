@@ -52,7 +52,8 @@ def parse_range_header(header, flen=0):
         if 0 <= start < end <= flen:
             return start, end
     except ValueError:
-        pass    
+        pass
+    return None,None
 
 
 def _file_iter_range(fp, offset, bytes, maxread=1024*1024):
@@ -171,7 +172,7 @@ def get_handler(root_path):
             if 'range' in headers:
                 self.send_response(206)
                 start, end = parse_range_header(headers, fs.st_size)
-                if start and end:
+                if start!=None and end!=None:
                     f = open(path, 'rb')
                     #if f: f = _file_iter_range(f, start, end-start)
                     f.seek(start)
@@ -179,8 +180,8 @@ def get_handler(root_path):
                     self.send_header("Content-Range","bytes %d-%d/%d" % (start, end-1, fs.st_size))
                     self.send_header("Content-Length", str(end-start))
                 else:
-                     self.send_error(416, "Requested Range Not Satisfiable")
-                     return None
+                    self.send_error(416, "Requested Range Not Satisfiable")
+                    return None
             else:
                 self.send_response(200)
                 f = open(path, 'rb').read()
