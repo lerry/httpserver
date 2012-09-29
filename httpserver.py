@@ -159,6 +159,10 @@ def get_handler(root_path):
             headers = dict(self.headers)
             fs = os.stat(path)
 
+            self.send_header("Content-Length", str(fs[6]))
+            self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+            self.send_header("Accept-Ranges", "bytes")   
+
             if 'if-modified-since' in headers:
                 ims = headers['if-modified-since'] 
                 ims = parse_date(ims.split(";")[0].strip())
@@ -188,9 +192,6 @@ def get_handler(root_path):
                 self.send_header("Content-type", mimetype)
             #if encoding:
             #    self.send_header("Content-Encoding", encoding)
-            self.send_header("Content-Length", str(fs[6]))
-            self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
-            self.send_header("Accept-Ranges", "bytes")            
             self.end_headers()
             result = StringIO()
             result.write(f)
