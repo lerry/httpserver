@@ -144,7 +144,7 @@ def get_handler(root_path):
                     return self.list_directory(path)
             
             mimetype = get_mime_type(path)            
-            root = os.path.abspath(root_path) + os.sep
+            root = os.path.abspath(root_path)
 
             if not path.startswith(root):
                 self.send_error(403, "Access denied.")
