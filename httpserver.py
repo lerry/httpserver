@@ -2,10 +2,9 @@
 #coding=utf-8
 
 '''
-For:
 by Lerry  http://lerry.org
 Start from 2011/07/27 22:49:51
-Last edit at 2011/07/27
+Last edit at 2012/09/29
 '''
 import os
 import posixpath
@@ -231,7 +230,7 @@ class ThreadingServer(ThreadingMixIn, HTTPServer):
 def run(port=8080, doc_root=os.getcwd()):
     serveraddr = ('', port)
     serv = ThreadingServer(serveraddr, get_handler(doc_root))
-    print 'Server Started at port:',port
+    print 'Server Started at port:', port
     serv.serve_forever()
 
 def test():
