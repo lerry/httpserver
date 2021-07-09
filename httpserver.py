@@ -204,7 +204,7 @@ def get_handler(root_path):
             path = posixpath.normpath(urllib.unquote(path))
             words = path.split('/')
             words = filter(None, words)
-            path = root_path#os.getcwd()
+            path = root_path
             for word in words:
                 drive, word = os.path.splitdrive(word)
                 head, word = os.path.split(word)
@@ -217,11 +217,8 @@ def get_handler(root_path):
             headers = str(self.headers).split()
             print 'Range' in self.headers
             for index,data in enumerate(headers):
-                #print data
                 if data.strip().lower().startswith('range'):#.startswith('range:'):
-                    #print data, headers[index+1]
                     pass
-            #print str(headers)
     return _RerootedHTTPRequestHandler
         
 class ThreadingServer(ThreadingMixIn, HTTPServer):
