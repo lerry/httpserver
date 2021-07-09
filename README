@@ -1,6 +1,9 @@
 httpserver
 =======================================
 This httpserver is a enhanced version of SimpleHTTPServer. 
+
 It was write in python, I use some code from bottle[https://github.com/defnull/bottle] 
+
 It support resuming download, you can set the document root, it has more 
+
 friendly error hit, and it can handle mimetype gracefully
